@@ -47,7 +47,10 @@ class Media(ApiModel):
 
         if entry['location']:
             new_media.location = Location.object_from_dictionary(entry['location'])
-
+        
+        if entry.get('caption'):
+            new_media.caption = entry['caption']['text']
+        
         new_media.link = entry['link']
 
         return new_media
