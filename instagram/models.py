@@ -45,11 +45,16 @@ class Media(ApiModel):
 
         new_media.created_time = timestamp_to_datetime(entry['created_time'])
 
-        if entry['location']:
+        try:
             new_media.location = Location.object_from_dictionary(entry['location'])
-        
-        if entry.get('caption'):
+        except KeyError:
+            new_media.location = None
+            
+        try:
             new_media.caption = entry['caption']['text']
+        except KeyError:
+            new_media.caption = None
+        
         
         new_media.link = entry['link']
 
