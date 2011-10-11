@@ -52,7 +52,7 @@ class Media(ApiModel):
             
         try:
             new_media.caption = entry['caption']['text']
-        except KeyError:
+        except (KeyError, TypeError):
             new_media.caption = None
         
         
