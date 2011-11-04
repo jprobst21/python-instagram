@@ -99,7 +99,7 @@ class Location(ApiModel):
     @classmethod
     def object_from_dictionary(cls, entry):
         point = None
-        if entry['latitude']:
+        if entry.get('latitude', False):
             point = Point(entry.get('latitude'),
                           entry.get('longitude'))
         location = cls(entry.get('id'),
